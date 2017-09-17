@@ -1,4 +1,4 @@
-function [T,M,x] = Crout( A,b )
+function [T,M,y,x] = Crout( A,b )
 %	用克劳特分解(追赶法)解三对角矩阵
 %   A = LDM L为单位下三角矩阵，D为对角矩阵，M为单位上三角矩阵
 %   Ax=b A的顺序主子式均不为零

@@ -20,7 +20,7 @@ while (abs(x-x_k) > 0.001)
     iter = iter+1;
     x_k = x;
     for i=1:m
-        x(i) = B(i,:)*x + f(i)
+        x(i) = B(i,:)*x + f(i);
     end
 end
 

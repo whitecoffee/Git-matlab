@@ -1,27 +1,16 @@
-function [ B,f,x,iter ] = SOR( A,b,x_per,omega )
+function [x,iter] = SOR( A,b,omega,N,Epsilon)
 %使用逐次超松驰迭代法求解方程组近似解
-%   Ax=b => Bx+f=x
-m = size(A,1);
-B = zeros(m,m);
-f = zeros(m,1);
-
-for i=1:m
-    delta = omega/A(i,i);
-    for j=1:m
-        B(i,j) = -delta*A(i,j);
+n = size(A,1);
+x = zeros(n,1);
+for iter=1:N
+    R = zeros(n,1);
+    for i=1:n
+        R(i) = omega*(b(i)-sum(A(i,:)*x))/A(i,i);
+        x(i) = x(i)+R(i);
     end
-    B(i,i) = 0;
-    f(i) = delta*b(i);
-end
-
-iter = 0;
-x = zeros(m,1);
-while (abs(x-x_per) > 0.0001)
-    iter = iter+1;
-    for i=1:m
-        x(i) = B(i,:)*x + f(i);
+    if max(abs(R))<= Epsilon
+        break;
     end
 end
-
 end
 
